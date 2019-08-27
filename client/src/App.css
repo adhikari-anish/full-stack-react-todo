@@ -70,7 +70,7 @@
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
   padding: 30px;
   width: 40%;
-  margin: 50px auto;
+  margin: 50px auto 15px;
 }
 
 .register-box h1,
@@ -250,4 +250,11 @@ input#checkBox {
   font-size: 12px;
   color: rgb(63, 63, 63);
   float: right;
+}
+
+.errormsg {
+  color: rgb(184, 0, 0);
+  font-style: italic;
+  width: 47%;
+  margin: 0px auto;
 }

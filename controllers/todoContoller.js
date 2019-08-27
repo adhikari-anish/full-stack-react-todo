@@ -1,6 +1,5 @@
 const Todo = require("../models/todo");
 const Sequelize = require("sequelize");
-var _ = require("underscore");
 
 const getTodos = function(req, res, next) {
   if (req.query.sort) {
