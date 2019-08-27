@@ -1,0 +1,253 @@
+.clearfix:after {
+  content: "";
+  display: block;
+  clear: both;
+}
+
+/* Header */
+.header {
+  /* color: blue; */
+  background: #00fa9a;
+  padding: 10px;
+}
+
+#logo {
+  font-style: italic;
+  text-align: center;
+  text-decoration: underline;
+}
+
+.header h1 {
+  font-size: 48px;
+  margin: 0px;
+}
+
+.header-bottom {
+  margin-top: 30px;
+}
+
+.wrapper {
+  max-width: 58.75em;
+  margin: 0 auto;
+}
+
+#username {
+  font-size: 20px;
+  text-transform: capitalize;
+  display: inline;
+  font-style: italic;
+  clear: both;
+}
+
+.menu ul li {
+  display: inline;
+  font-size: 18px;
+  margin-left: 20px;
+}
+
+.menu ul {
+  list-style-type: none;
+  margin: 0;
+}
+
+.menu {
+  float: right;
+}
+
+.link {
+  color: black;
+  text-decoration: none;
+}
+
+.link:hover {
+  color: #808080;
+}
+
+/* register, login page */
+.register-box,
+.login-box {
+  border-radius: 2px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+  padding: 30px;
+  width: 40%;
+  margin: 50px auto;
+}
+
+.register-box h1,
+.login-box h1 {
+  margin-top: 0px;
+  font-weight: lighter;
+}
+
+.register-box input[type="text"],
+.register-box input[type="email"],
+.register-box input[type="password"],
+.login-box input[type="text"],
+.login-box input[type="email"],
+.login-box input[type="password"] {
+  display: block;
+  outline: none;
+  border: none;
+  font-size: 16px;
+  margin-bottom: 25px;
+  padding: 5px;
+  width: 100%;
+  height: 32px;
+  border-bottom: 1px solid #aaa;
+  transition: 0.2s ease;
+}
+
+.register-box input[type="text"]:focus,
+.register-box input[type="email"]:focus,
+.register-box input[type="password"]:focus,
+.login-box input[type="text"]:focus,
+.login-box input[type="email"]:focus,
+.login-box input[type="password"]:focus {
+  border-bottom: 1px solid #00fa9a;
+  transition: 0.2s ease;
+}
+
+.register-box button[type="submit"],
+.login-box button[type="submit"] {
+  margin-top: 5px;
+  width: 125px;
+  height: 32px;
+  background: #00fa9a;
+  border: none;
+  border-radius: 2px;
+  /* color: #fff; */
+  text-transform: uppercase;
+  transition: 0.1s ease;
+  cursor: pointer;
+}
+
+.register-box button[type="submit"]:hover,
+.register-box button[type="submit"]:focus,
+.login-box button[type="submit"]:hover,
+.login-box button[type="submit"]:focus {
+  opacity: 0.8;
+  outline: none;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+  transition: 0.1s ease;
+}
+
+.add-todo {
+  margin: 30px 0px;
+}
+
+.add-todo input[type="text"] {
+  /* margin-top: 20px; */
+  border-radius: 5px;
+  outline: none;
+  border: none;
+  border: 1px solid #aaa;
+  height: 32px;
+  padding: 0px 5px;
+  font-size: 16px;
+  width: 86.0671%;
+  margin-right: 25px;
+}
+
+.add-todo input[type="text"]:focus {
+  border: 1px solid #00fa9a;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+}
+
+.add-todo input[type="submit"] {
+  width: 10%;
+  background-color: #00fa9a;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+  display: inline-block;
+  padding: 10px 5px;
+}
+
+.add-todo input[type="submit"]:hover {
+  background-color: #34e3a0;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+}
+
+input#checkBox {
+  padding: 10px;
+}
+
+#edit-button {
+  background-color: #00fa9a;
+  border: 0px;
+  outline: 0px;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  float: right;
+  margin-right: 20px;
+}
+
+#edit-button:hover {
+  background-color: #34e3a0;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+}
+
+.delete-btn {
+  float: right;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+  background-color: red;
+  outline: 0px;
+  padding: 5px 10px;
+  /* font-size: 18px;
+  font-style: italic; */
+}
+
+.delete-btn:hover {
+  background-color: rgb(248, 87, 87);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+}
+
+.todo-status p {
+  margin: 5px;
+  font-style: italic;
+  color: #0d925f;
+}
+
+.edit-form input[type="text"] {
+  border-radius: 5px;
+  outline: none;
+  border: none;
+  border: 1px solid #aaa;
+  height: 32px;
+  padding: 0px 5px;
+  font-size: 16px;
+  width: 100%;
+  margin: 20px 0px;
+  box-sizing: border-box;
+}
+
+.edit-form input[type="text"]:focus {
+  border: 1px solid #00fa9a;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+}
+
+.edit-form input[type="submit"] {
+  width: 10%;
+  background-color: #00fa9a;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+  display: inline-block;
+  padding: 10px 5px;
+}
+
+.edit-form input[type="submit"]:hover {
+  background-color: #34e3a0;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+}
+
+.todo-date {
+  font-style: italic;
+  margin-top: 10px;
+  font-size: 12px;
+  color: rgb(63, 63, 63);
+  float: right;
+}
