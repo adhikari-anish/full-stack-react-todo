@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { register } from "./UserFunctions";
+import checkToken from "../checkToken";
 // import {login} from ''
 
 export class Register extends Component {
@@ -94,4 +95,4 @@ export class Register extends Component {
   }
 }
 
-export default Register;
+export default checkToken(Register);

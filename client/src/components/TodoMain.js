@@ -227,15 +227,7 @@ class TodoMain extends React.Component {
           changeOrder={this.changeOrder}
         />
         {this.state.todos.length === 0 ? (
-          <div
-            style={{
-              fontSize: "20px",
-              textAlign: "center",
-              backgroundColor: "gray"
-            }}
-          >
-            Nothings yet
-          </div>
+          <div className="no-todos">Nothings yet</div>
         ) : (
           <div></div>
         )}

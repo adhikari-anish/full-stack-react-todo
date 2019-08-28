@@ -24,9 +24,9 @@ class FilterTodo extends Component {
 
   render() {
     return (
-      <div>
+      <div className="filter">
         <span>Filter: </span>
-        <select onChange={this.changeFilter}>
+        <select class="filter-select" onChange={this.changeFilter}>
           {/* <option hidden>Filter</option> */}
           <option>All</option>
           <option value="Completed">Completed</option>
@@ -34,14 +34,14 @@ class FilterTodo extends Component {
         </select>
 
         <span>Sort by: </span>
-        <select onChange={this.changeSort}>
+        <select class="filter-select" onChange={this.changeSort}>
           {/* <option hidden>Sort by</option> */}
           <option value="Date">Date</option>
           <option value="Title">Title</option>
         </select>
 
         <span>Order: </span>
-        <select onChange={this.changeOrder}>
+        <select class="filter-select" onChange={this.changeOrder}>
           <option value="Desc">Desc</option>
           <option value="Asc">Asc</option>
         </select>
