@@ -26,7 +26,7 @@ export class App extends Component {
       <Router>
         <div className="App">
           <Header userName={this.state.username} />
-          <Route exact path="/" component={Home} />
+          {/* <Route exact path="/" component={Home} /> */}
           <div className="container">
             <Route exact path="/about" component={About} />
             {/* <Route
@@ -40,7 +40,7 @@ export class App extends Component {
               path="/todomain"
               render={props => <TodoMain setUserName={this.setUserName} />}
             />
-            <Route exact path="/login" component={Login} />
+            <Route exact path="/" component={Login} />
             <Route exact path="/register" component={Register} />
           </div>
         </div>

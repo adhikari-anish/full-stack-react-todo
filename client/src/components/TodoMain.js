@@ -226,6 +226,19 @@ class TodoMain extends React.Component {
           changeSort={this.changeSort}
           changeOrder={this.changeOrder}
         />
+        {this.state.todos.length === 0 ? (
+          <div
+            style={{
+              fontSize: "20px",
+              textAlign: "center",
+              backgroundColor: "gray"
+            }}
+          >
+            Nothings yet
+          </div>
+        ) : (
+          <div></div>
+        )}
         <Todos
           todos={this.state.todos}
           delTodo={this.delTodo}

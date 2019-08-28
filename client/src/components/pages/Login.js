@@ -1,7 +1,9 @@
 import React, { Component } from "react";
 import { login } from "./UserFunctions";
+// import checkLogin from "../CheckLogin";
+import checkToken from "../checkToken";
 
-export class Login extends Component {
+class Login extends Component {
   constructor() {
     super();
     this.state = {
@@ -26,13 +28,11 @@ export class Login extends Component {
     login(user)
       .then(res => {
         localStorage.setItem("usertoken", res.data);
-        this.props.history.push(`/todomain`);
+        this.props.history.push("/todomain");
       })
       .catch(err => {
-        console.log("er", err.response.data.message);
         this.setState({ errormsg: err.response.data.message });
       });
-    // this.props.history.push("/todomain");
   };
 
   render() {
@@ -66,4 +66,4 @@ export class Login extends Component {
   }
 }
 
-export default Login;
+export default checkToken(Login);

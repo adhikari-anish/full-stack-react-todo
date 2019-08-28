@@ -2,17 +2,17 @@ import React from "react";
 import { Redirect } from "react-router";
 // import { withRouter } from "react-router-dom";
 
-const checkLogin = WrappedComponent => {
-  class CheckLogin extends React.Component {
+const checkToken = WrappedComponent => {
+  class CheckToken extends React.Component {
     render() {
       if (!localStorage.usertoken) {
-        return <Redirect to="/" />;
-      } else {
         return <WrappedComponent {...this.props} />;
+      } else {
+        return <Redirect to="/todomain" />;
       }
     }
   }
-  return CheckLogin;
+  return CheckToken;
 };
 
-export default checkLogin;
+export default checkToken;
