@@ -4,10 +4,10 @@ import { BrowserRouter as Router, Route } from "react-router-dom";
 import TodoMain from "./components/TodoMain";
 import Header from "./components/layout/Header";
 import About from "./components/pages/About";
-import Home from "./components/pages/Home";
+// import Home from "./components/pages/Home";
 import Login from "./components/pages/Login";
 import Register from "./components/pages/Register";
-import Reset from "./reset.css";
+// import Reset from "./reset.css";
 
 export class App extends Component {
   constructor() {

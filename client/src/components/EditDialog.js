@@ -31,8 +31,7 @@ let dialogCloseButtonStyles = {
   fontWeight: "bold",
   float: "right",
   backgroundColor: "red",
-  outline: "none",
-  float: "right"
+  outline: "none"
 };
 
 class EditDialog extends Component {
