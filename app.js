@@ -2,7 +2,6 @@ var express = require("express");
 var bodyParser = require("body-parser");
 var cors = require("cors");
 var morgan = require("morgan");
-var _ = require("underscore");
 
 var todos = require("./routes/todos");
 

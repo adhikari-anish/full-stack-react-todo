@@ -23,6 +23,10 @@ module.exports = db.sequelize.define(
     created_at: {
       type: "TIMESTAMP"
       // defaultValue: Sequelize.literal("CURRENT_TIMESTAMP"),
+    },
+    note: {
+      type: Sequelize.STRING,
+      allowNull: true
     }
   },
   {

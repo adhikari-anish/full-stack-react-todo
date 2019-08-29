@@ -1,13 +1,8 @@
 import React from "react";
-// import { BrowserRouter as Router, withRouter } from "react-router-dom";
 import "../../src/App.css";
 import Todos from "./Todos";
-// import Header from "./layout/Header";
 import AddTodo from "./AddTodo";
-// import About from "./pages/About";
 import TodoStatus from "./TodoStatus";
-// // import uuid from "uuid";
-// import axios from "axios";
 import { axiosInstance } from "./axiosInstance";
 import checkLogin from "./CheckLogin";
 import EditDialog from "./EditDialog";
@@ -18,9 +13,34 @@ class TodoMain extends React.Component {
     super();
     this.state = {
       todos: [],
-      isOpen: false
+      isOpen: false,
+      sortBy: "created_at",
+      orderBy: "desc",
+      filter: "all",
+      editId: "",
+      editTitle: "",
+      note: undefined
     };
   }
+
+  setFilterState = (name, state) => {
+    if (state === "Date") {
+      state = "created_at";
+    }
+    this.setState({ [name]: state }, () => {
+      this.fetchData();
+    });
+  };
+
+  fetchData = () => {
+    axiosInstance
+      .get(
+        `/api/todos?filter=${this.state.filter}&orderBy=${this.state.orderBy}&sortBy=${this.state.sortBy}`
+      )
+      .then(res => {
+        this.setState({ todos: res.data });
+      });
+  };
 
   getUserName() {
     if (localStorage.usertoken) {
@@ -32,7 +52,7 @@ class TodoMain extends React.Component {
 
   componentDidMount() {
     if (localStorage.usertoken) {
-      axiosInstance.get("/api/todos?sort=-created_at").then(res => {
+      axiosInstance.get("/api/todos").then(res => {
         // console.log(res.data);
         this.setState({ todos: res.data });
       });
@@ -64,22 +84,42 @@ class TodoMain extends React.Component {
     );
   };
 
-  addTodo = title => {
-    // const newTodo = {
-    //   id: uuid.v4(),
-    //   title,
-    //   completed: false
-    // };
+  addNote = (id, note) => {
+    axiosInstance
+      .put(`/api/todo/${id}`, {
+        note
+      })
+      .then(res => {
+        this.setState({
+          todos: this.state.todos.map(todo => {
+            if (id === todo.id) {
+              todo.note = note;
+            }
+            return todo;
+          })
+        });
+        // console.log(id);
+        // console.log(this.state.todos);
+      });
+  };
 
+  getNote = note => {
+    this.setState({ note });
+    // console.log(note);
+    // return this.state.note.data;
+  };
+
+  addTodo = title => {
     axiosInstance
       .post("api/todo", {
         title,
         completed: false
       })
       .then(res => {
-        this.setState({ todos: [...res.data, ...this.state.todos] });
+        if (this.state.filter !== "Completed") {
+          this.setState({ todos: [...res.data, ...this.state.todos] });
+        }
       });
-    // this.setState({ todos: [...this.state.todos, newTodo] });
   };
 
   calTask = task => {
@@ -93,16 +133,7 @@ class TodoMain extends React.Component {
     }
   };
 
-  // rTask = () => {
-  //   let cList = this.state.todos.filter(todo => {
-  //     return todo.completed === true;
-  //   });
-  //   let rList = this.state.todos.length - cList.length;
-  //   return rList;
-  // }
-
   editTodo = (id, title) => {
-    // var eTodo = prompt("Edit todo:", title);
     if (title === "") {
       return;
     }
@@ -136,77 +167,13 @@ class TodoMain extends React.Component {
   };
 
   getId = id => {
-    this.state.editId = id;
-  };
-
-  filter = status => {
-    if (status === "Completed") {
-      axiosInstance
-        .get("/api/todos?sort=-created_at&completed=true")
-        .then(res => {
-          // console.log(res.data);
-          this.setState({ todos: res.data });
-        });
-    } else if (status === "Incomplete") {
-      axiosInstance
-        .get("/api/todos?sort=-created_at&completed=false")
-        .then(res => {
-          // console.log(res.data);
-          this.setState({ todos: res.data });
-        });
-    } else if (status === "All") {
-      axiosInstance.get("/api/todos?sort=-created_at").then(res => {
-        // console.log(res.data);
-        this.setState({ todos: res.data });
-      });
-    }
-  };
-
-  changeSort = sortBy => {
-    if (sortBy === "Title") {
-      axiosInstance.get("/api/todos?sort=-title").then(res => {
-        // console.log(res.data);
-        this.setState({ todos: res.data });
-      });
-      // console.log("date");
-    } else if (sortBy === "Date") {
-      axiosInstance.get("/api/todos?sort=-created_at").then(res => {
-        // console.log(res.data);
-        this.setState({ todos: res.data });
-      });
-    }
-  };
-
-  changeOrder = (order, sortBy) => {
-    if (sortBy === "Date") {
-      if (order === "Asc") {
-        axiosInstance.get("/api/todos?sort=created_at").then(res => {
-          // console.log(res.data);
-          this.setState({ todos: res.data });
-        });
-      } else if (order === "Desc") {
-        axiosInstance.get("/api/todos?sort=-created_at").then(res => {
-          // console.log(res.data);
-          this.setState({ todos: res.data });
-        });
-      }
-    } else if (sortBy === "Title") {
-      if (order === "Asc") {
-        axiosInstance.get("/api/todos?sort=title").then(res => {
-          // console.log(res.data);
-          this.setState({ todos: res.data });
-        });
-      } else if (order === "Desc") {
-        axiosInstance.get("/api/todos?sort=-title").then(res => {
-          // console.log(res.data);
-          this.setState({ todos: res.data });
-        });
-      }
-    }
+    // this.state.editId = id;
+    this.setState({ editId: id });
   };
 
   getTitle = title => {
-    this.state.editTitle = title;
+    // this.state.editTitle = title;
+    this.setState({ editTitle: title });
     // console.log(title);
   };
 
@@ -221,11 +188,12 @@ class TodoMain extends React.Component {
           editTitle={this.state.editTitle}
         />
         <AddTodo addTodo={this.addTodo} />
-        <FilterTodo
-          filter={this.filter}
-          changeSort={this.changeSort}
-          changeOrder={this.changeOrder}
-        />
+        <FilterTodo setFilterState={this.setFilterState} />
+        {this.state.todos.length === 0 ? (
+          <div className="no-todos">No tasks</div>
+        ) : (
+          <div></div>
+        )}
         <Todos
           todos={this.state.todos}
           delTodo={this.delTodo}
@@ -235,8 +203,11 @@ class TodoMain extends React.Component {
           isOpen={this.state.isOpen}
           setTrue={this.setTrue}
           getTitle={this.getTitle}
+          addNote={this.addNote}
+          getNote={this.getNote}
+          note={this.state.note}
         />
-        <TodoStatus calTask={this.calTask} />
+        <TodoStatus calTask={this.calTask} filterState={this.state.filter} />
       </div>
     );
   }

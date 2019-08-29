@@ -11,6 +11,10 @@
   padding: 10px;
 }
 
+body {
+  margin: 0px;
+}
+
 #logo {
   font-style: italic;
   text-align: center;
@@ -70,7 +74,7 @@
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
   padding: 30px;
   width: 40%;
-  margin: 50px auto;
+  margin: 50px auto 15px;
 }
 
 .register-box h1,
@@ -205,8 +209,12 @@ input#checkBox {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
 }
 
+.todo-status {
+  margin: 30px 0px;
+}
+
 .todo-status p {
-  margin: 5px;
+  line-height: 10px;
   font-style: italic;
   color: #0d925f;
 }
@@ -250,4 +258,52 @@ input#checkBox {
   font-size: 12px;
   color: rgb(63, 63, 63);
   float: right;
+}
+
+.errormsg {
+  color: rgb(184, 0, 0);
+  font-style: italic;
+  width: 47%;
+  margin: 0px auto;
+}
+
+.filter {
+  margin-bottom: 30px;
+  text-align: right;
+}
+
+.filter span {
+  margin-left: 20px;
+  font-style: italic;
+}
+
+.filter select {
+  background-color: #00fa9a;
+  border-radius: 5px;
+  cursor: pointer;
+  border: none;
+  padding: 5px;
+  outline: none;
+  /* font-size: 14px; */
+  padding: 5px 10px;
+}
+
+.filter select:hover {
+  background-color: #34e3a0;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+}
+
+.no-todos {
+  font-size: 30px;
+  text-align: center;
+  line-height: 100px;
+  border-radius: 5px;
+  background-color: rgb(199, 197, 197);
+  color: white;
+}
+
+.add-note {
+  width: 75%;
+  height: 150px;
+  /* display: none; */
 }

@@ -1,47 +1,42 @@
 import React, { Component } from "react";
 
 class FilterTodo extends Component {
-  state = {
-    sortBy: "Date"
-  };
-
-  changeFilter = e => {
-    this.props.filter(e.target.value);
-  };
-
-  changeSort = e => {
-    this.setState({
-      sortBy: e.target.value
-    });
-
-    this.props.changeSort(e.target.value);
-  };
-
-  changeOrder = e => {
-    this.props.changeOrder(e.target.value, this.state.sortBy);
-    // console.log(e.target.value, this.state.sortBy);
+  setFilter = e => {
+    this.props.setFilterState(e.target.name, e.target.value);
   };
 
   render() {
     return (
-      <div>
+      <div className="filter">
         <span>Filter: </span>
-        <select onChange={this.changeFilter}>
+        <select
+          className="filter-select"
+          onChange={this.setFilter}
+          name="filter"
+        >
           {/* <option hidden>Filter</option> */}
           <option>All</option>
-          <option value="Completed">Completed</option>
-          <option value="Incomplete">Incompleted</option>
+          <option>Completed</option>
+          <option>Incomplete</option>
         </select>
 
         <span>Sort by: </span>
-        <select onChange={this.changeSort}>
+        <select
+          className="filter-select"
+          onChange={this.setFilter}
+          name="sortBy"
+        >
           {/* <option hidden>Sort by</option> */}
           <option value="Date">Date</option>
           <option value="Title">Title</option>
         </select>
 
         <span>Order: </span>
-        <select onChange={this.changeOrder}>
+        <select
+          className="filter-select"
+          onChange={this.setFilter}
+          name="orderBy"
+        >
           <option value="Desc">Desc</option>
           <option value="Asc">Asc</option>
         </select>
