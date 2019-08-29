@@ -18,7 +18,8 @@ class TodoMain extends React.Component {
       orderBy: "desc",
       filter: "all",
       editId: "",
-      editTitle: ""
+      editTitle: "",
+      note: undefined
     };
   }
 
@@ -81,6 +82,31 @@ class TodoMain extends React.Component {
         todos: this.state.todos.filter(todo => id !== todo.id)
       })
     );
+  };
+
+  addNote = (id, note) => {
+    axiosInstance
+      .put(`/api/todo/${id}`, {
+        note
+      })
+      .then(res => {
+        this.setState({
+          todos: this.state.todos.map(todo => {
+            if (id === todo.id) {
+              todo.note = note;
+            }
+            return todo;
+          })
+        });
+        // console.log(id);
+        // console.log(this.state.todos);
+      });
+  };
+
+  getNote = note => {
+    this.setState({ note });
+    // console.log(note);
+    // return this.state.note.data;
   };
 
   addTodo = title => {
@@ -177,6 +203,9 @@ class TodoMain extends React.Component {
           isOpen={this.state.isOpen}
           setTrue={this.setTrue}
           getTitle={this.getTitle}
+          addNote={this.addNote}
+          getNote={this.getNote}
+          note={this.state.note}
         />
         <TodoStatus calTask={this.calTask} filterState={this.state.filter} />
       </div>

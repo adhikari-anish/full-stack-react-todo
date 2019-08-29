@@ -4,6 +4,7 @@ import PropTypes from "prop-types";
 // import { prototype } from 'stream';
 
 class Todos extends Component {
+  //display:id=null
   render() {
     // console.log(this.props.todos);
     return this.props.todos.map(todo => (
@@ -17,6 +18,10 @@ class Todos extends Component {
         setTrue={this.props.setTrue}
         getId={this.props.getId}
         getTitle={this.props.getTitle}
+        addNote={this.props.addNote}
+        getNote={this.props.getNote}
+        note={this.props.note}
+        // openTextView=(todo.id===this.state.displayId)
       />
     ));
   }

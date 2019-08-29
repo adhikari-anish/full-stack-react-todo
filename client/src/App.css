@@ -11,6 +11,10 @@
   padding: 10px;
 }
 
+body {
+  margin: 0px;
+}
+
 #logo {
   font-style: italic;
   text-align: center;
@@ -296,4 +300,10 @@ input#checkBox {
   border-radius: 5px;
   background-color: rgb(199, 197, 197);
   color: white;
+}
+
+.add-note {
+  width: 75%;
+  height: 150px;
+  /* display: none; */
 }

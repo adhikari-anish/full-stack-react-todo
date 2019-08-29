@@ -49,7 +49,8 @@ const postTodos = function(req, res, next) {
     Todo.create({
       user_id: req.user.id,
       title: req.body.title,
-      completed: false
+      completed: false,
+      note: req.body.note
     })
       .then(data => {
         Todo.findAll({
@@ -102,23 +103,24 @@ const markTodos = function(req, res, next) {
 };
 
 const editTodos = function(req, res, next) {
-  if (!req.body.title) {
-    res.status(400);
-    res.json({
-      error: "Enter title"
-    });
-  } else {
-    Todo.update(
-      { title: req.body.title, completed: req.body.completed },
-      { where: { id: req.params.id } }
-    )
-      .then(() => {
-        res.json({ status: "Todo updated" });
-      })
-      .catch(err => {
-        next({ message: "Error editing todo" });
+  Todo.update(
+    {
+      title: req.body.title,
+      completed: req.body.completed,
+      note: req.body.note
+    },
+    { where: { id: req.params.id } }
+  )
+    .then(() => {
+      Todo.findOne({
+        where: { id: req.params.id }
+      }).then(data => {
+        res.json(data.note);
       });
-  }
+    })
+    .catch(err => {
+      next({ message: "Error editing todo" });
+    });
 };
 
 module.exports = {
