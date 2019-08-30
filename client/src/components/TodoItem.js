@@ -44,11 +44,10 @@ class TodoItem extends Component {
 
   render() {
     const { id, title, completed, note } = this.props.todo;
-    console.log(this.props.todo);
 
     let textArea;
 
-    if (this.props.openTextView) {
+    if (this.state.displayTextArea) {
       textArea = (
         <>
           <textarea
