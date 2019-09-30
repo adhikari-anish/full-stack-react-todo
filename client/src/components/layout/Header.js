@@ -32,8 +32,8 @@ export class Header extends Component {
     const loginRegLink = (
       <>
         <li>
-          <Link className="link" to="/login">
-            Login
+          <Link className="link" to="/">
+            Home
           </Link>
         </li>
         <li>
@@ -46,11 +46,11 @@ export class Header extends Component {
 
     const userLink = (
       <>
-        <li>
+        {/* <li>
           <Link className="link" to="/todomain">
             Todos
           </Link>
-        </li>
+        </li> */}
         <li>
           <a href="" onClick={this.logOut.bind(this)} className="link">
             Logout
@@ -68,11 +68,11 @@ export class Header extends Component {
             </div>
             <div className="menu">
               <ul>
-                <li>
+                {/* <li>
                   <Link className="link" to="/">
                     Home
                   </Link>
-                </li>
+                </li> */}
                 {/* <li>
                   <Link className="link" to="/about">
                     About

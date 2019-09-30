@@ -1,38 +1,20 @@
 const Todo = require("../models/todo");
 const Sequelize = require("sequelize");
-var _ = require("underscore");
 
 const getTodos = function(req, res, next) {
-  if (req.query.sort) {
-    const sort = req.query.sort; //// e.g. localhost:3000/api/todos?sort=id
-
-    var field = sort;
-    var order = "ASC";
-    if (sort.charAt(0) === "-") {
-      (order = "DESC"), (field = sort.substring(1));
-    }
-  } else {
-    field = "created_at";
-    order = "DESC";
-  }
+  const sortBy = req.query.sortBy || "created_at";
+  let filter = req.query.filter;
+  filter = filter && filter.toLowerCase() === "all" ? "" : filter;
+  const orderBy = req.query.orderBy || "desc";
 
   let query = {};
-  if (req.query.completed !== undefined) {
-    query.completed = JSON.parse(req.query.completed);
+  if (filter) {
+    query.completed = filter.toLowerCase() === "completed" ? 1 : 0;
   }
 
-  // var whereCondition = {};
-  // if (!completed) {
-  //   whereCondition.user_id = req.user.id;
-  // } else {
-  //   whereCondition.user_id = req.user.id;
-  //   whereCondition.completed = completed;
-  // }
-
-  // req.user.id;
   Todo.findAll({
     where: { user_id: req.user.id, ...query },
-    order: [[field, order]]
+    order: [[sortBy, orderBy]]
   })
     .then(todos => {
       todos.map(todo => {
@@ -67,7 +49,8 @@ const postTodos = function(req, res, next) {
     Todo.create({
       user_id: req.user.id,
       title: req.body.title,
-      completed: false
+      completed: false,
+      note: req.body.note
     })
       .then(data => {
         Todo.findAll({
@@ -79,7 +62,6 @@ const postTodos = function(req, res, next) {
 
           res.send(todos);
         });
-        // res.send(data);
       })
       .catch(() => {
         next({
@@ -121,23 +103,24 @@ const markTodos = function(req, res, next) {
 };
 
 const editTodos = function(req, res, next) {
-  if (!req.body.title) {
-    res.status(400);
-    res.json({
-      error: "Enter title"
-    });
-  } else {
-    Todo.update(
-      { title: req.body.title, completed: req.body.completed },
-      { where: { id: req.params.id } }
-    )
-      .then(() => {
-        res.json({ status: "Todo updated" });
-      })
-      .catch(err => {
-        next({ message: "Error editing todo" });
+  Todo.update(
+    {
+      title: req.body.title,
+      completed: req.body.completed,
+      note: req.body.note
+    },
+    { where: { id: req.params.id } }
+  )
+    .then(() => {
+      Todo.findOne({
+        where: { id: req.params.id }
+      }).then(data => {
+        res.json(data.note);
       });
-  }
+    })
+    .catch(err => {
+      next({ message: "Error editing todo" });
+    });
 };
 
 module.exports = {

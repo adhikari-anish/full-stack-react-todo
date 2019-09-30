@@ -1,13 +1,19 @@
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
-
 const config = require("./../config");
+const validateNewUser = require("../middlewares/validateNewUser");
 
 const User = require("../models/User");
 
 // process.env.SECRET_KEY = "secret";
 
 const createUser = (req, res, next) => {
+  const { error } = validateNewUser(req.body);
+
+  if (error) {
+    return res.status(400).send({ message: error.details[0].message });
+  }
+
   const today = new Date();
   const userData = {
     first_name: req.body.first_name,
