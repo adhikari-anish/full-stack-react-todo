@@ -17,7 +17,7 @@ let dialogStyles = {
   left: "50%",
   top: "50%",
   transform: "translate(-50%, -50%)",
-  backgroundColor: "#eee",
+  backgroundColor: "#8a8a8a",
   padding: "17px 25px 26px",
   borderRadius: "8px"
 };
@@ -66,7 +66,8 @@ class EditDialog extends Component {
   render() {
     // console.log(this.state.editTitle);
     let dialog = (
-      <div style={dialogBackground}>
+      // <div style={dialogBackground}>
+      <div>
         <div style={dialogStyles}>
           <button
             style={dialogCloseButtonStyles}

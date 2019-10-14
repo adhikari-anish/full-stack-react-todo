@@ -7,7 +7,7 @@ class TodoItem extends Component {
 
     this.state = {
       displayTextArea: false,
-      note: props.todo.note
+      note: props.note
     };
   }
 
@@ -57,9 +57,9 @@ class TodoItem extends Component {
             value={this.state.note}
             onChange={this.getTextValue}
           />
-          <button onClick={() => this.setState({ displayTextArea: false })}>
+          {/* <button onClick={() => this.setState({ displayTextArea: false })}>
             Hide note
-          </button>
+          </button> */}
         </>
       );
     } else {
